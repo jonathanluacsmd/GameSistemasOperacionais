@@ -16,6 +16,7 @@ class load extends Phaser.Scene {
     create(dadosGame) {
         this.scene.bringToTop();
         this.scene.launch(dadosGame.nome);
+        this.scene.bringToTop();
         this.add.image(400,300,'loading');
     }
 };
