@@ -3,24 +3,19 @@ class load extends Phaser.Scene {
         super('load');
     }
 
-    init() {
-        this.scene.get('teste').events.on('pronto',function(){            
+    init(dadosGame) {
+        this.scene.get(dadosGame.nome).events.on('pronto',function(){            
             this.scene.stop();
         },this);
     }
 
     preload(){
         this.load.image('loading','./img/loading.jpg');
-        this.scene.launch('teste');
+    }
+
+    create(dadosGame) {
         this.scene.bringToTop();
-    }
-
-    create() {
+        this.scene.launch(dadosGame.nome);
         this.add.image(400,300,'loading');
-    }
-
-    update(){
-        console.log('ok');
-        
     }
 };

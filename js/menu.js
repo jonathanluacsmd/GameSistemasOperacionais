@@ -3,10 +3,6 @@ class menu extends Phaser.Scene {
         super({key: 'menu'});
     }
 
-    init(){
-        console.log(this.scene.key);
-        //console.log(this.scene.get('menu'));
-    }
     preload() {
         this.load.image('menumemoria','img/menumemoria.png');
         this.load.image('menuprocessos','img/menuprocessos.png');
@@ -28,7 +24,7 @@ class menu extends Phaser.Scene {
         });
 
         imagemmemoria.on('pointerdown', function(pointer){
-            this.scene.scene.start('load'); 
+            this.scene.scene.start('load',{nome: 'GameMemoria'}); 
         });
 
         imagemprocessos.on('pointerover', function () {
@@ -40,7 +36,7 @@ class menu extends Phaser.Scene {
         });
 
         imagemprocessos.on('pointerdown', function(pointer){
-            this.scene.scene.start('load'); 
+            this.scene.scene.start('load',{nome: 'GameProcessos'}); 
         });
 
         imagemarquivos.on('pointerover', function () {
@@ -52,7 +48,7 @@ class menu extends Phaser.Scene {
         });
 
         imagemarquivos.on('pointerdown', function(pointer){
-            this.scene.scene.start('load'); 
+            this.scene.scene.start('load',{nome: 'GameArquivos'}); 
         });
 
         imagemdispositivos.on('pointerover', function () {
@@ -64,7 +60,7 @@ class menu extends Phaser.Scene {
         });
 
         imagemdispositivos.on('pointerdown', function(pointer){
-            this.scene.scene.start('load'); 
+            this.scene.scene.start('load',{nome: 'GameDispositivos'}); 
         });
     }
 };
@@ -74,5 +70,5 @@ var game = new Phaser.Game({
     width: 800,
     height: 600,
     backgroundColor: '#c0c0c0',
-    scene: [menu, load, teste]
+    scene: [menu, load, GameMemoria,GameArquivos,GameDispositivos,GameProcessos]
 });

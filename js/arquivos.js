@@ -1,6 +1,6 @@
-class teste extends Phaser.Scene {
+class GameArquivos extends Phaser.Scene {
     constructor (){
-        super('teste');
+        super('GameArquivos');
     }
 
     preload(){
@@ -18,6 +18,6 @@ class teste extends Phaser.Scene {
     }
 
     update(){
-        console.log("teste");   
+        console.log("GameArquivos");   
     }
 };
