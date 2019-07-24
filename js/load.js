@@ -4,14 +4,14 @@ class load extends Phaser.Scene {
     }
 
     init() {
-        this.scene.get('memoria').events.on('pronto',function(){            
+        this.scene.get('teste').events.on('pronto',function(){            
             this.scene.stop();
         },this);
     }
 
     preload(){
         this.load.image('loading','./img/loading.jpg');
-        this.scene.launch('memoria');
+        this.scene.launch('teste');
         this.scene.bringToTop();
     }
 

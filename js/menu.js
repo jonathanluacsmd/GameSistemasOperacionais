@@ -74,5 +74,5 @@ var game = new Phaser.Game({
     width: 800,
     height: 600,
     backgroundColor: '#c0c0c0',
-    scene: [menu, load, teste, GameMemoria]
+    scene: [menu, load, teste]
 });
