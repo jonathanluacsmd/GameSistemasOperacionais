@@ -10,8 +10,8 @@ class menu extends Phaser.Scene {
         this.load.image('menuarquivos','img/menuarquivos.png');
     }
     create() {
-        var imagemmemoria = this.add.image(200,150, 'menuprocessos').setInteractive();
-        var imagemprocessos = this.add.image(600,150, 'menumemoria').setInteractive();
+        var imagemprocessos = this.add.image(200,150, 'menuprocessos').setInteractive();
+        var imagemmemoria = this.add.image(600,150, 'menumemoria').setInteractive();
         var imagemarquivos = this.add.image(200,450, 'menuarquivos').setInteractive();
         var imagemdispositivos = this.add.image(600,450, 'menudispositivos').setInteractive();
 
