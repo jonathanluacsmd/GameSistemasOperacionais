@@ -61,6 +61,7 @@ class Memoria{
                 this.memoria[i][j]=null;
             }
         }
+        this.flagalocacao = true;
     }
     removePeca(p){
         if (p!=null) {
