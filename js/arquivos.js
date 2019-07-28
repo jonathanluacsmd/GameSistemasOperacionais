@@ -52,18 +52,11 @@ class GameArquivos extends Phaser.Scene {
         this.load.image('base-bau', './img/arquivos/base-bau.png');
         this.load.image('trans-h', './img/arquivos/transicao-h.jpg');
         this.load.image('trans-v', './img/arquivos/transicao-v.jpg');
+        this.events.emit('pronto');
     }
 
     create() 
     {
-        this.add.image(400,300,'t');
-        setTimeout(
-            () => {
-                this.events.emit('pronto');
-            },
-            5000
-        );
-
             //  O plano de fundo e a base inicial do jogador
         this.add.image(0, 0, 'background').setOrigin(0).setScrollFactor(1);
         this.add.image(0, 600, 'background').setOrigin(0).setScrollFactor(1);
@@ -214,8 +207,8 @@ class GameArquivos extends Phaser.Scene {
 
         // Checa para ver se jogador sobrepôs com alguma base de baú ou base inicial, 
         // se sim, chama as funções collectBlock e finishFile, respectivamente
-        this.physics.add.overlap(player, bases, collectBlock, null, this);
-        this.physics.add.overlap(player, baseInicial, finishFile, null, null);
+        this.physics.add.overlap(player, bases, this.collectBlock, null, this);
+        this.physics.add.overlap(player, baseInicial, this.finishFile, null, null);
 
         // Faz a câmera não passar das bordas do "mundo" e seguir o jogador
         this.cameras.main.setBounds(0, 0, 800 * 2, 600 * 2);
@@ -256,8 +249,6 @@ class GameArquivos extends Phaser.Scene {
 
     update()
     {
-        console.log("GameArquivos");
-
         if (gameOver)
         {
             return;
