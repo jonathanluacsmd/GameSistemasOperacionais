@@ -249,10 +249,10 @@ class GameArquivos extends Phaser.Scene {
 
     update()
     {
-        if (gameOver)
+        /*if (gameOver)
         {
             return;
-        }
+        }*/
         // Define a velocidade e a animação, conforme a tecla pressionada
         if (cursors.left.isDown)
         {
