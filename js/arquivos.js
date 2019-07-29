@@ -63,8 +63,8 @@ class GameArquivos extends Phaser.Scene {
         this.add.image(800, 0, 'background').setOrigin(0).setScrollFactor(1);
         this.add.image(800, 600, 'background').setOrigin(0).setScrollFactor(1);
         baseInicial = this.physics.add.image(190, 150, 'base');
-        this.add.image(800, 305, 'trans-h');
-        this.add.image(800, 905, 'trans-h');
+        this.add.image(801, 305, 'trans-h');
+        this.add.image(801, 905, 'trans-h');
         this.add.image(401, 645, 'trans-v');
         this.add.image(1201, 645, 'trans-v');
     
