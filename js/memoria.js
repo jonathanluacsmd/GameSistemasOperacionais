@@ -216,36 +216,36 @@ class GameMemoria extends Phaser.Scene {
     preload ()
     {
         //Carregando imagem do grid
-        this.load.image('grid', 'img/grid.png');
+        this.load.image('grid', 'img/memoria/grid.png');
 
         /**
          * Carregando imagens das peças
          */
-        this.load.image('pecaazulpequena', 'img/azulpequena.png');
-        this.load.image('pecaazulmedia', 'img/azulmedia.png');
-        this.load.image('pecaazulgrande', 'img/azulgrande.png');
+        this.load.image('pecaazulpequena', 'img/memoria/azulpequena.png');
+        this.load.image('pecaazulmedia', 'img/memoria/azulmedia.png');
+        this.load.image('pecaazulgrande', 'img/memoria/azulgrande.png');
 
-        this.load.image('pecavermelhapequena', 'img/vermelhapequena.png');
-        this.load.image('pecavermelhamedia', 'img/vermelhamedia.png');
-        this.load.image('pecavermelhagrande', 'img/vermelhagrande.png');
+        this.load.image('pecavermelhapequena', 'img/memoria/vermelhapequena.png');
+        this.load.image('pecavermelhamedia', 'img/memoria/vermelhamedia.png');
+        this.load.image('pecavermelhagrande', 'img/memoria/vermelhagrande.png');
 
-        this.load.image('pecaverdepequena', 'img/verdepequena.png');
-        this.load.image('pecaverdemedia', 'img/verdemedia.png');
-        this.load.image('pecaverdegrande', 'img/verdegrande.png');
+        this.load.image('pecaverdepequena', 'img/memoria/verdepequena.png');
+        this.load.image('pecaverdemedia', 'img/memoria/verdemedia.png');
+        this.load.image('pecaverdegrande', 'img/memoria/verdegrande.png');
 
-        this.load.image('pecaamarelapequena', 'img/amarelapequena.png');
-        this.load.image('pecaamarelamedia', 'img/amarelamedia.png');
-        this.load.image('pecaamarelagrande', 'img/amarelagrande.png');
+        this.load.image('pecaamarelapequena', 'img/memoria/amarelapequena.png');
+        this.load.image('pecaamarelamedia', 'img/memoria/amarelamedia.png');
+        this.load.image('pecaamarelagrande', 'img/memoria/amarelagrande.png');
 
-        this.load.image('pecaroxapequena', 'img/roxapequena.png');
-        this.load.image('pecaroxamedia', 'img/roxamedia.png');
-        this.load.image('pecaroxagrande', 'img/roxagrande.png');
+        this.load.image('pecaroxapequena', 'img/memoria/roxapequena.png');
+        this.load.image('pecaroxamedia', 'img/memoria/roxamedia.png');
+        this.load.image('pecaroxagrande', 'img/memoria/roxagrande.png');
 
-        this.load.image('imagemdefundo','img/fundo.jpg');
-        this.load.image('container1','img/container1.jpg');
-        this.load.image('container2','img/container2.jpg');
-        this.load.image('container3','img/container3.jpg');
-        this.load.image('container4','img/container4.jpg');
+        this.load.image('imagemdefundo','img/memoria/fundo.jpg');
+        this.load.image('container1','img/memoria/container1.jpg');
+        this.load.image('container2','img/memoria/container2.jpg');
+        this.load.image('container3','img/memoria/container3.jpg');
+        this.load.image('container4','img/memoria/container4.jpg');
 
         //this.load.audio('musicas', ['audio/TopGear1.mp3', 'audio/Tetris.mp3',]);
         this.load.audio('musicas', ['audio/Tetris.mp3']);
@@ -342,7 +342,7 @@ class GameMemoria extends Phaser.Scene {
             paused:true
         });
         flagreg = false;
-        contagemRegEvent = this.time.addEvent({
+        var contagemRegEvent = this.time.addEvent({
             delay:1000,
             callback: function (){
                 if(flagreg){
@@ -354,6 +354,7 @@ class GameMemoria extends Phaser.Scene {
             timeScale: 1,
             loop: true,
         });
+        this.events.emit('pronto');
     }
 
     update ()
