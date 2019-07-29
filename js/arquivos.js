@@ -347,7 +347,11 @@ class GameArquivos extends Phaser.Scene {
             this.physics.pause();
             player.setTint(0xff0000);
             player.anims.play('turn');
-            gameOver = true;
+            //gameOver = true;
+			if (keySpace.isDown)
+			{
+				this.scene.start('menu');
+			}
         }
     
     }
