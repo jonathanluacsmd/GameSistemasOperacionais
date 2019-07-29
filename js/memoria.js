@@ -1,4 +1,5 @@
 //Classe peça
+
 class Peca{
     constructor(tamanho, cor){
         this.tamanho = tamanho;
@@ -7,16 +8,16 @@ class Peca{
         this.origem = {x: 560,y: 100};
         switch (cor) {
             case 0xff0000:
-                this.tempoemswap = 4;
+                this.tempoemswap = 5;
                 break;
             case 0x00ff00:
-                this.tempoemswap = 7;
+                this.tempoemswap = 8;
                 break;
             case 0x0000ff:
-                this.tempoemswap = 10;
+                this.tempoemswap = 11;
                 break;
             case 0xe2f61a:
-                this.tempoemswap = 13;
+                this.tempoemswap = 14;
                 break;
             case 0x5a005a:
                 this.tempoemswap = 16;
@@ -24,7 +25,7 @@ class Peca{
             default:
                 break;
         }
-        this.tempodevida = 40 + Math.floor(Math.random() * 20);
+        this.tempodevida = 10 + Math.floor(Math.random() * 20);
         this.temporizadorswap = this.tempoemswap;
         this.flagtempodevida = false;
         this.flagtempoemswap = false;
@@ -200,50 +201,51 @@ var timedEvent;
 var t1;
 var t2;
 var t3;
+var t4;
 //Variaveis de controle de fluxo
 var estado = 0;
 var moveupecapramemoria = false;
 var moveupecadaswappramemoria = false;
 var moveupecadamemoriapraswap = false;
 
-
 class GameMemoria extends Phaser.Scene {
     constructor (){
         super('GameMemoria');
     }
+
     preload ()
     {
         //Carregando imagem do grid
-        this.load.image('grid', 'img/memoria/grid.png');
+        this.load.image('grid', 'img/grid.png');
 
         /**
          * Carregando imagens das peças
          */
-        this.load.image('pecaazulpequena', 'img/memoria/azulpequena.png');
-        this.load.image('pecaazulmedia', 'img/memoria/azulmedia.png');
-        this.load.image('pecaazulgrande', 'img/memoria/azulgrande.png');
+        this.load.image('pecaazulpequena', 'img/azulpequena.png');
+        this.load.image('pecaazulmedia', 'img/azulmedia.png');
+        this.load.image('pecaazulgrande', 'img/azulgrande.png');
 
-        this.load.image('pecavermelhapequena', 'img/memoria/vermelhapequena.png');
-        this.load.image('pecavermelhamedia', 'img/memoria/vermelhamedia.png');
-        this.load.image('pecavermelhagrande', 'img/memoria/vermelhagrande.png');
+        this.load.image('pecavermelhapequena', 'img/vermelhapequena.png');
+        this.load.image('pecavermelhamedia', 'img/vermelhamedia.png');
+        this.load.image('pecavermelhagrande', 'img/vermelhagrande.png');
 
-        this.load.image('pecaverdepequena', 'img/memoria/verdepequena.png');
-        this.load.image('pecaverdemedia', 'img/memoria/verdemedia.png');
-        this.load.image('pecaverdegrande', 'img/memoria/verdegrande.png');
+        this.load.image('pecaverdepequena', 'img/verdepequena.png');
+        this.load.image('pecaverdemedia', 'img/verdemedia.png');
+        this.load.image('pecaverdegrande', 'img/verdegrande.png');
 
-        this.load.image('pecaamarelapequena', 'img/memoria/amarelapequena.png');
-        this.load.image('pecaamarelamedia', 'img/memoria/amarelamedia.png');
-        this.load.image('pecaamarelagrande', 'img/memoria/amarelagrande.png');
+        this.load.image('pecaamarelapequena', 'img/amarelapequena.png');
+        this.load.image('pecaamarelamedia', 'img/amarelamedia.png');
+        this.load.image('pecaamarelagrande', 'img/amarelagrande.png');
 
-        this.load.image('pecaroxapequena', 'img/memoria/roxapequena.png');
-        this.load.image('pecaroxamedia', 'img/memoria/roxamedia.png');
-        this.load.image('pecaroxagrande', 'img/memoria/roxagrande.png');
+        this.load.image('pecaroxapequena', 'img/roxapequena.png');
+        this.load.image('pecaroxamedia', 'img/roxamedia.png');
+        this.load.image('pecaroxagrande', 'img/roxagrande.png');
 
-        this.load.image('imagemdefundo','img/memoria/fundo.jpg');
-        this.load.image('container1','img/memoria/container1.jpg');
-        this.load.image('container2','img/memoria/container2.jpg');
-        this.load.image('container3','img/memoria/container3.jpg');
-        this.load.image('container4','img/memoria/container4.jpg');
+        this.load.image('imagemdefundo','img/fundo.jpg');
+        this.load.image('container1','img/container1.jpg');
+        this.load.image('container2','img/container2.jpg');
+        this.load.image('container3','img/container3.jpg');
+        this.load.image('container4','img/container4.jpg');
 
         //this.load.audio('musicas', ['audio/TopGear1.mp3', 'audio/Tetris.mp3',]);
         this.load.audio('musicas', ['audio/Tetris.mp3']);
@@ -321,7 +323,7 @@ class GameMemoria extends Phaser.Scene {
         infopontuacaopontos = this.add.text(610, 360, String(pontos), { fill: '#000000', fontFamily: 'font1' ,fontSize: 11 });
 
         //Cria Relogio
-        temporizador = 10;
+        temporizador = 3;
         flagtemporizador = false;
         timedEvent = this.time.addEvent({
             delay: 1000,
@@ -340,7 +342,7 @@ class GameMemoria extends Phaser.Scene {
             paused:true
         });
         flagreg = false;
-        var contagemRegEvent = this.time.addEvent({
+        contagemRegEvent = this.time.addEvent({
             delay:1000,
             callback: function (){
                 if(flagreg){
@@ -349,18 +351,9 @@ class GameMemoria extends Phaser.Scene {
                     }
                 }
             },
-            //args: [flagreg],
             timeScale: 1,
             loop: true,
         });
-
-        this.events.emit('pronto');
-        /*setTimeout(
-            () => {
-                
-            },
-            5000
-        );*/        
     }
 
     update ()
@@ -435,7 +428,7 @@ class GameMemoria extends Phaser.Scene {
                         melhorposicao = worstFit(novapeca,memoria);
                     }
                 //Zerar Temporizador
-                    temporizador = 10;
+                    temporizador = 3;
                     timedEvent.elapsed = 0;
                     flagtemporizador = true;
                     estado = 3;
@@ -775,15 +768,17 @@ function verificarAcerto(posicao,melhorescolha){
 }
 
 function gameOver(scene){
-  t1 = scene.add.text(300, 280, 'Game Over', { fill: '#000000', fontFamily: 'font1', align:'center' ,fontSize: 30});
-  t2 = scene.add.text(300, 360, 'Recorde: ' + maxpontos, { fill: '#000000', fontFamily: 'font1', align:'center' ,fontSize: 15});
-  t3 = scene.add.text(300, 390, 'Clique para recomeçar', { fill: '#000000', fontFamily: 'font1', align:'center' ,fontSize: 15});
+  t4 = scene.add.image(400,300,'container3').setAlpha(0.75);
+  t1 = scene.add.text(270, 220, 'Game Over', { fill: '#000000', fontFamily: 'font1', align:'center' ,fontSize: 30});
+  t2 = scene.add.text(270, 300, 'Recorde: ' + maxpontos, { fill: '#000000', fontFamily: 'font1', align:'center' ,fontSize: 15});
+  t3 = scene.add.text(270, 330, 'Clique para recomeçar', { fill: '#000000', fontFamily: 'font1', align:'center' ,fontSize: 15});
 }
 
 function clearGameOver(){
   t1.destroy();
   t2.destroy();
   t3.destroy();
+  t4.destroy();
 }
 
 
