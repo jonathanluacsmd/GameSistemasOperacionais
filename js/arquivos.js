@@ -235,9 +235,9 @@ class GameArquivos extends Phaser.Scene {
         infoAjuda = this.add.text(player.x, player.y, infos[j], { fontFamily: 'Arial', fontSize: '32px', fill: '#000' } );
         infoAjuda.setVisible(true);
         // Informações na base inicial (sobre as teclas M e Space)
-        tutorial1 = this.add.text(20, 220, 'M - informações', { fontFamily: 'Arial', fontSize: '32px', fill: '#000' } );
-        tutorial2 = this.add.text(20, 250, 'Space - interagir', { fontFamily: 'Arial', fontSize: '32px', fill: '#000' } );
-        tutorial3 = this.add.text(60, 50, 'Base Inicial', { fontFamily: 'Arial', fontSize: '36px', fill: '#000' } );
+        tutorial1 = this.add.text(20, 220, 'M - informações', { fontFamily: 'Arial', fontSize: '32px', fill: '#ffffff' } );
+        tutorial2 = this.add.text(20, 250, 'Space - interagir', { fontFamily: 'Arial', fontSize: '32px', fill: '#ffffff' } );
+        tutorial3 = this.add.text(60, 50, 'Base Inicial', { fontFamily: 'Arial', fontSize: '36px', fill: '#ffffff' } );
         // Tempo restante
         tempoRest = this.add.text(16, 56, 'Tempo: ' + tempo, { fontFamily: 'Verdana', fontSize: '32px', fill: '#000' } );
         // Pontuação
