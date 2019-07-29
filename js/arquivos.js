@@ -341,15 +341,27 @@ class GameArquivos extends Phaser.Scene {
         if (tempo >= 0)
         {
             tempoRest.setText('Tempo: ' + tempo);
+            gameOver = false;
         }
         else 
         {
-            this.physics.pause();
-            player.setTint(0xff0000);
+            //this.physics.pause();
+            //player.setTint(0xff0000);
             player.anims.play('turn');
-            //gameOver = true;
-			if (keySpace.isDown)
+            gameOver = true;
+			tempoRest.setText('Tempo: 0 -> Space + M -> Menu');
+			if (keySpace.isDown && keyM.isDown)
 			{
+				tempo = 100;
+				level = 1;
+				contBlocos = 1;
+				score = 0;
+				player.setPosition(200, 150);
+				gameOver = false;
+				infoText.setText('Blocos Restantes: ' + contBlocos);
+				texto = infoText;
+				scoreText.setText('Score: ' + score);
+				tempoRest.setText('Tempo: ' + tempo);
 				this.scene.start('menu');
 			}
         }
@@ -359,7 +371,7 @@ class GameArquivos extends Phaser.Scene {
     // Função para coletar o bloco, se player estiver no baú correto
     collectBlock (player, base)
     {
-        if (keySpace.isDown)
+        if (keySpace.isDown && !gameOver)
         {
             if (base == bases.getChildren()[j] && contBlocos > 0)
             {
@@ -380,7 +392,7 @@ class GameArquivos extends Phaser.Scene {
     // e player está interagindo com a base inicial
     finishFile (player, baseInicial)
     {
-        if (keySpace.isDown && contBlocos == 0)
+        if (keySpace.isDown && contBlocos == 0 && !gameOver)
         {
             score += (level * 10);
             tempo += (level * 5);
