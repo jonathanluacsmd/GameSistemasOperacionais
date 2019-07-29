@@ -60,8 +60,8 @@ class menu extends Phaser.Scene {
         });
 
         imagemdispositivos.on('pointerdown', function(pointer){
-            //this.scene.scene.start('load',{nome: 'GameDispositivos'}); 
-            this.scene.scene.start('Disploader');
+            this.scene.scene.start('load',{nome: 'GameDispositivos'}); 
+            //this.scene.scene.start('Disploader');
         });
     }
 };

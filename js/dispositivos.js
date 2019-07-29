@@ -159,6 +159,7 @@ class GameDispositivos extends Phaser.Scene{
             //musica.stop();
             this.scene.scene.start('menu');
         });
+        this.events.emit('pronto');
     }
 
     // Método para mudar a velocidade de rotação do alvo
