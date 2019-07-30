@@ -353,7 +353,7 @@ class jogo extends Phaser.Scene{
 	esteirasDisponiveis() {
 		var temp = [];
 		for(let i=0; i<NUM_ESTEIRAS; i++)
-			if(caixas[i].length < 7 && possivelInserir[i])
+			if(caixas[i].length < 5 && possivelInserir[i])
 				temp.push(i);
 		if(temp.length == 0)
 			return null;
