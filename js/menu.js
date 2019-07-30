@@ -78,5 +78,5 @@ var game = new Phaser.Game({
         default: 'arcade',
         arcade: { debug: false }
     },
-    scene: [menu, load, GameMemoria,GameArquivos,GameDispositivos,Disploader,GameProcessos]
+    scene: [menu, load, GameMemoria,GameArquivos,GameDispositivos,Disploader,GameProcessos, jogo, sobre, instrucao, creditos]
 });
