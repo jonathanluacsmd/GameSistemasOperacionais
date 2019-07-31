@@ -28,7 +28,7 @@ var velocidadeCaixas;
 var controleCaixa;
 var numCaixas;
 var possivelInserir = [];
-var tempoSjf = 60000;
+var tempoSjf;
 var jogando = false;
 var eventoSjf;
 var tempoSpawn;
@@ -162,7 +162,8 @@ class jogo extends Phaser.Scene{
 			}
 		}
 
-		somCaixa = this.sound.add('pegarCaixa');
+		tempoSjf = 30000;
+		somCaixa = this.sound.add('pegarCaixa').setVolume(0.2);
 		somPersonagem = this.sound.add('moverPersonagem');
 		somGameOver = this.sound.add('somGameOver');
 		somFundo = this.sound.add('musicaFundo');
@@ -238,7 +239,7 @@ class jogo extends Phaser.Scene{
 		if(botao == escalonamento.SJF){
 			velocidadeCaixas = 1500;
 			tempoSpawn = 100000*3/velocidadeCaixas ;
-			numCaixas = 19;
+			numCaixas = 10;
 		    timedEvent = this.time.addEvent({ delay: tempoSpawn, callback: this.onEvent, callbackScope: this, repeat:numCaixas});
 		}
 			
@@ -400,7 +401,8 @@ class jogo extends Phaser.Scene{
 				p++;
 			}	
 			fila.splice(p, 1);
-			somErro.play();
+			if(habilitaSom)
+				somErro.play();
 		}
 		caixas[esteira].shift();
 		
@@ -513,7 +515,8 @@ class jogo extends Phaser.Scene{
 			}
 			//limpa a caixa
 			caixas[esteira].length = 0;
-			somCaixa.play();
+			if(habilitaSom)
+				somCaixa.play();
 			pontos += 10;
 		}
 		else{
@@ -550,10 +553,12 @@ class jogo extends Phaser.Scene{
 
 	gameOver(){
 		gameOverTexto.setVisible(true);
+		gameOverTexto.setDepth(10);
         timedEvent.remove();
         somFundo.pause();
 		botaoVoltar.setInteractive();
 		botaoVoltar.setVisible(true);
+		botaoVoltar.setDepth(10);
 		if(habilitaSom)
 			somGameOver.play();
 		var temp = habilitaSom;
@@ -634,6 +639,7 @@ class jogo extends Phaser.Scene{
 			timedEvent.pause = true;
 			controleCaixa.elapsed = 0;
 			var esteira = Phaser.Math.RoundTo(player.y * 5 / ALTURA) - 2;
+			arrumarEnvelhecer = false;
 			
 			//setando a flag pra resetar o timer do evento de game over por não envelhecer
 			//ou na linguagem de SO o teu processo ter dado um straving
@@ -671,7 +677,6 @@ class jogo extends Phaser.Scene{
 			for(let i=0; i<caixas[esteira-1].length-1; ++i)
 				this.physics.add.collider(caixas[esteira-1][caixas[esteira-1].length-1].img, caixas[esteira-1][i].img);
 			possivelInserir[esteira-1] = true;
-			arrumarEnvelhecer = false;
 		}
 	}
 	
@@ -862,15 +867,15 @@ class jogo extends Phaser.Scene{
 			//a ideia é reduzir o tempo de 1 min até 30 seg
 			// chegou em 30 seg aumenta em 1 o número de caixas
 			//volta o tempo pra 45 seg
-			if(tempoSjf < 30000 && numCaixas < 30) {
+			if(tempoSjf < 15000 && numCaixas < 20) {
 					numCaixas++;
-					tempoSjf = 45000;
+					tempoSjf = 22000;
 				
 			}
-			else if(tempoSjf > 35000)
+			else if(tempoSjf > 15000)
 					tempoSjf -= 5000;
 			else
-				tempoSjf = 30000;
+				tempoSjf = 15000;
 				
 			timedEvent = this.time.addEvent({ delay: tempoSpawn, callback: this.onEvent, callbackScope: this, repeat: numCaixas});
 		}
