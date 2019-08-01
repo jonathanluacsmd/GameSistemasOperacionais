@@ -18,9 +18,6 @@ var baseInicial; //onde o jogador começa
 var infos=['setor 1 - esquerda baixo', 'setor 1 - direita cima', 'setor 1 - direita baixo'];
 var infoAjuda; // informações do proximo bloco na tecla M
 var infoAux; // Para escrever 'proximo bau'
-var tutorial1; // informações básicas no início
-var tutorial2;
-var tutorial3;
 var contBlocos = 1; // número de blocos restantes
 var level = 1; // número de blocos que o jogador precisará coletar
 var tempo = 100; // tempo inicial
@@ -72,6 +69,17 @@ class GameArquivos extends Phaser.Scene {
         this.add.image(801, 905, 'trans-h');
         this.add.image(401, 645, 'trans-v');
         this.add.image(1201, 645, 'trans-v');
+
+        // Informações na base inicial (sobre as teclas M e Space)
+        this.add.text(20, 220, 'M - informações', { fontFamily: 'Arial', fontSize: '32px', fill: '#ffffff' } );
+        this.add.text(20, 250, 'Space - interagir', { fontFamily: 'Arial', fontSize: '32px', fill: '#ffffff' } );
+        this.add.text(60, 50, 'Base Inicial', { fontFamily: 'Arial', fontSize: '36px', fill: '#ffffff' } );
+		
+		// Nomes dos setores
+		this.add.text(350, 300, 'Setor 1', { fontFamily: 'Arial', fontSize: '32px', fill: '#a9a9a9' } );
+		this.add.text(1060, 300, 'Setor 2', { fontFamily: 'Arial', fontSize: '32px', fill: '#a9a9a9' } );
+		this.add.text(350, 900, 'Setor 3', { fontFamily: 'Arial', fontSize: '32px', fill: '#a9a9a9' } );
+		this.add.text(1150, 840, 'Setor 4', { fontFamily: 'Arial', fontSize: '32px', fill: '#a9a9a9' } );
     
         // O grupo que contém as paredes
         platforms = this.physics.add.staticGroup();
@@ -245,10 +253,6 @@ class GameArquivos extends Phaser.Scene {
         // Informações sobre onde está o próximo baú (na tecla M)
         infoAjuda = this.add.text(player.x, player.y, infos[j], { fontFamily: 'Arial', fontSize: '32px', fill: '#000' } );
         infoAjuda.setVisible(true);
-        // Informações na base inicial (sobre as teclas M e Space)
-        tutorial1 = this.add.text(20, 220, 'M - informações', { fontFamily: 'Arial', fontSize: '32px', fill: '#ffffff' } );
-        tutorial2 = this.add.text(20, 250, 'Space - interagir', { fontFamily: 'Arial', fontSize: '32px', fill: '#ffffff' } );
-        tutorial3 = this.add.text(60, 50, 'Base Inicial', { fontFamily: 'Arial', fontSize: '36px', fill: '#ffffff' } );
         // Tempo restante
         tempoRest = this.add.text(16, 56, 'Tempo: ' + tempo, { fontFamily: 'Verdana', fontSize: '32px', fill: '#000' } );
         // Pontuação
