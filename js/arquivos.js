@@ -28,6 +28,8 @@ var tempoRest; //para mostrar o tempo restante
 var timedEvent; //para decrementar o tempo restante
 var auxX = 0; //para reproduzir a animação do jogador parado
 var auxY = 0;
+var bauAberto;
+var bauBloco;
 
 class GameArquivos extends Phaser.Scene {
     constructor (){
@@ -52,6 +54,9 @@ class GameArquivos extends Phaser.Scene {
         this.load.image('base-bau', './img/arquivos/base-bau.png');
         this.load.image('trans-h', './img/arquivos/transicao-h.jpg');
         this.load.image('trans-v', './img/arquivos/transicao-v.jpg');
+		this.load.image('bau-aberto', './img/arquivos/bau-aberto.png');
+        this.load.image('bau-bloco', './img/arquivos/bau-bloco.png');
+        
         this.events.emit('pronto');
     }
 
@@ -126,6 +131,12 @@ class GameArquivos extends Phaser.Scene {
         baus.create(950, 1140, 'bau').setScale(0.5).refreshBody();
         baus.create(1250, 1140, 'bau').setScale(0.5).refreshBody();
         baus.create(1300, 970, 'bau').setScale(0.5).refreshBody();
+
+		// colocando os baús abertos, com e sem bloco dentro
+		bauAberto = this.add.image(500, 500, 'bau-aberto').setScale(0.5);
+		bauBloco = this.add.image(500, 500, 'bau-bloco').setScale(0.5);
+		bauAberto.setVisible(false);
+		bauBloco.setVisible(false);
 
         //criando "bases" dos baús(com +30px em cada direção), que serão usadas para interação com player
         bases = this.physics.add.staticGroup();
@@ -375,6 +386,9 @@ class GameArquivos extends Phaser.Scene {
         {
             if (base == bases.getChildren()[j] && contBlocos > 0)
             {
+				bauBloco.setPosition(base.x, base.y);
+				bauBloco.setVisible(true);
+				
                 j = Phaser.Math.Between(0, 17);
                 infoAjuda.setText( infos[j] );
                 contBlocos = contBlocos - 1;
@@ -382,9 +396,22 @@ class GameArquivos extends Phaser.Scene {
             }
             else if (contBlocos == 0)
             {
+				bauAberto.setPosition(base.x, base.y);
+				bauAberto.setVisible(true);
+			
                 infoText.setText('Blocos Restantes: ' + contBlocos + ' volte à base');
             }
+			else
+			{
+				bauAberto.setPosition(base.x, base.y);
+				bauAberto.setVisible(true);
+			}
         }
+		else
+		{
+			bauBloco.setVisible(false);
+			bauAberto.setVisible(false);
+		}
     
     }
 
