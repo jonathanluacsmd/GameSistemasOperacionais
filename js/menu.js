@@ -25,7 +25,7 @@ class menu extends Phaser.Scene {
             this.setFrame(0);
         });
 
-        imagemmemoria.on('pointerdown', function(pointer){
+        imagemmemoria.once('pointerdown', function(pointer){
             this.scene.scene.stop();
             this.scene.scene.start('load',{nome: 'GameMemoria'});
         });
@@ -38,7 +38,7 @@ class menu extends Phaser.Scene {
             this.setFrame(0);
         });
 
-        imagemprocessos.on('pointerdown', function(pointer){
+        imagemprocessos.once('pointerdown', function(pointer){
             this.scene.scene.stop();
             this.scene.scene.start('load',{nome: 'GameProcessos'}); 
         });
@@ -51,7 +51,7 @@ class menu extends Phaser.Scene {
             this.setFrame(0);
         });
 
-        imagemarquivos.on('pointerdown', function(pointer){
+        imagemarquivos.once('pointerdown', function(pointer){
             this.scene.scene.stop();
             this.scene.scene.start('load',{nome: 'GameArquivos'}); 
         });
@@ -64,7 +64,7 @@ class menu extends Phaser.Scene {
             this.setFrame(0);
         });
 
-        imagemdispositivos.on('pointerdown', function(pointer){
+        imagemdispositivos.once('pointerdown', function(pointer){
             this.scene.scene.stop();
             this.scene.scene.start('load',{nome: 'GameDispositivos'}); 
         });

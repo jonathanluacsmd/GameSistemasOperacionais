@@ -341,7 +341,8 @@ class GameMemoria extends Phaser.Scene {
         });
         botaoVoltar.on('pointerdown', function(){
             musicas.stop();
-            this.scene.scene.stop('GameMemoria');
+            estado = 0;
+            this.scene.scene.stop(this.scene.key);
             this.scene.scene.start('menu');
         });
 
@@ -391,8 +392,7 @@ class GameMemoria extends Phaser.Scene {
             //Decrementar tempo de peças em Swap
             //Acrescentar Pontos [se peça for destruida da memoria]
             //Decrementar Pontuação [se cronometro passar de 0]
-
-
+        
         infopontuacaopontos.setText(pontos);
         if(regtempo==0){
         relogio.setText('Tempo Restante: ' + temporizador);

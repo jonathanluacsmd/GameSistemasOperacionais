@@ -57,15 +57,15 @@ class GameProcessos extends Phaser.Scene{
         botaoCREDITOS = this.add.sprite(LARGURA/2, ALTURA-100,'CREDITOS').setOrigin(0.5).setInteractive();
         botaoMusica = this.add.sprite(LARGURA - 20, 20, 'MUSICA').setOrigin(0.5).setInteractive();
         botaoSom = this.add.sprite(LARGURA - 40, 20, 'SOM').setOrigin(0.5).setInteractive();
-        botaoVoltarMenu = this.add.sprite(LARGURA/2, ALTURA*5/6+50, 'botaoVoltar').setOrigin(0.5).setInteractive();
+        var botaoVoltarMenu = this.add.sprite(LARGURA/2, ALTURA*5/6+50, 'botaoVoltar').setOrigin(0.5).setInteractive();
 
         botaoVoltarMenu.on('pointerover', function(){
-			botaoVoltar.setFrame(1);
+			botaoVoltarMenu.setFrame(1);
         });
         botaoVoltarMenu.on('pointerout' , function(){
-            botaoVoltar.setFrame(0);
+            botaoVoltarMenu.setFrame(0);
         });
-        botaoVoltarMenu.on('pointerdown' , function(){
+        botaoVoltarMenu.once('pointerdown' , function(){
             somMenu.stop();
             this.scene.scene.stop(this.scene.scene.key);
             this.scene.scene.start('menu');
