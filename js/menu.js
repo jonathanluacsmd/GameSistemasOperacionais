@@ -4,70 +4,76 @@ class menu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('menumemoria','img/menumemoria.png');
-        this.load.image('menuprocessos','img/menuprocessos.png');
-        this.load.image('menudispositivos','img/menudispositivos.png');
-        this.load.image('menuarquivos','img/menuarquivos.png');
-        this.load.image('menufundo','img/menufundo2.png');
+        this.load.spritesheet('menuprocessos', 'img/menuprocessos.png', {frameWidth: 335, frameHeight: 70});
+        this.load.spritesheet('menumemoria', 'img/menumemoria.png', {frameWidth: 284, frameHeight: 70});
+        this.load.spritesheet('menudispositivos', 'img/menudispositivos.png', {frameWidth: 388, frameHeight: 70});
+        this.load.spritesheet('menuarquivos', 'img/menuarquivos.png', {frameWidth: 298, frameHeight: 70});
+        this.load.spritesheet('menucreditos','assets/botaoCREDITOS.png',{frameWidth:227,frameHeight:40});
+        
     }
     create() {
-        var menufundo = this.add.image(0,0,'menufundo').setOrigin(0,0);
-        menufundo.setScale(1.5,1.7);
-        var imagemprocessos = this.add.image(200,150, 'menuprocessos').setInteractive();
-        var imagemmemoria = this.add.image(600,150, 'menumemoria').setInteractive();
-        var imagemarquivos = this.add.image(200,450, 'menuarquivos').setInteractive();
-        var imagemdispositivos = this.add.image(600,450, 'menudispositivos').setInteractive();
+        var imagemprocessos = this.add.sprite(400,150, 'menuprocessos').setInteractive();
+        var imagemmemoria = this.add.image(400,250, 'menumemoria').setInteractive();
+        var imagemarquivos = this.add.image(400,350, 'menuarquivos').setInteractive();
+        var imagemdispositivos = this.add.image(400,450, 'menudispositivos').setInteractive();
         
         imagemmemoria.on('pointerover', function () {
-            this.setTint(0x00ff00);
+            this.setFrame(1);
         });
 
         imagemmemoria.on('pointerout', function () {
-            this.clearTint();
+            this.setFrame(0);
         });
 
         imagemmemoria.on('pointerdown', function(pointer){
-            this.scene.scene.start('load',{nome: 'GameMemoria'}); 
+            this.scene.scene.stop();
+            this.scene.scene.start('load',{nome: 'GameMemoria'});
         });
 
         imagemprocessos.on('pointerover', function () {
-            this.setTint(0x00ff00);
+            this.setFrame(1);
         });
 
         imagemprocessos.on('pointerout', function () {
-            this.clearTint();
+            this.setFrame(0);
         });
 
         imagemprocessos.on('pointerdown', function(pointer){
+            this.scene.scene.stop();
             this.scene.scene.start('load',{nome: 'GameProcessos'}); 
         });
 
         imagemarquivos.on('pointerover', function () {
-            this.setTint(0x00ff00);
+            this.setFrame(1);
         });
 
         imagemarquivos.on('pointerout', function () {
-            this.clearTint();
+            this.setFrame(0);
         });
 
         imagemarquivos.on('pointerdown', function(pointer){
+            this.scene.scene.stop();
             this.scene.scene.start('load',{nome: 'GameArquivos'}); 
         });
 
         imagemdispositivos.on('pointerover', function () {
-            this.setTint(0x00ff00);
+            this.setFrame(1);
         });
 
         imagemdispositivos.on('pointerout', function () {
-            this.clearTint();
+            this.setFrame(0);
         });
 
         imagemdispositivos.on('pointerdown', function(pointer){
+            this.scene.scene.stop();
             this.scene.scene.start('load',{nome: 'GameDispositivos'}); 
-            //this.scene.scene.start('Disploader');
         });
     }
+    update(){
+        //console.log(this.scene.isVisible('load'));
+    }
 };
+
 
 var game = new Phaser.Game({
     type: Phaser.AUTO,
@@ -78,5 +84,5 @@ var game = new Phaser.Game({
         default: 'arcade',
         arcade: { debug: false }
     },
-    scene: [menu, load, GameMemoria,GameArquivos,GameDispositivos,Disploader,GameProcessos, jogo, sobre, instrucao, creditos]
+    scene: [menu, load,GameMemoria,GameArquivos,GameDispositivos,Disploader,GameProcessos, jogo, sobre, instrucao, creditos]
 });

@@ -79,7 +79,7 @@ class GameArquivos extends Phaser.Scene {
 		this.add.text(350, 300, 'Setor 1', { fontFamily: 'Arial', fontSize: '32px', fill: '#a9a9a9' } );
 		this.add.text(1060, 300, 'Setor 2', { fontFamily: 'Arial', fontSize: '32px', fill: '#a9a9a9' } );
 		this.add.text(350, 900, 'Setor 3', { fontFamily: 'Arial', fontSize: '32px', fill: '#a9a9a9' } );
-		this.add.text(1150, 840, 'Setor 4', { fontFamily: 'Arial', fontSize: '32px', fill: '#a9a9a9' } );
+        this.add.text(1150, 840, 'Setor 4', { fontFamily: 'Arial', fontSize: '32px', fill: '#a9a9a9' } );
     
         // O grupo que contém as paredes
         platforms = this.physics.add.staticGroup();
@@ -259,7 +259,6 @@ class GameArquivos extends Phaser.Scene {
         scoreText = this.add.text(16, 96, 'Score: ' + score, { fontFamily: 'Verdana', fontSize: '32px', fill: '#000' } );
         // Decrementa o tempo restante, conforme passa o tempo
         timedEvent = this.time.addEvent({delay: 1000, callback: function () {tempo--;}, timeScale: 1, loop: true});
-
     }
 
     update()

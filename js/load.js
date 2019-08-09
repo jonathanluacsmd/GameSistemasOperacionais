@@ -6,13 +6,12 @@ class load extends Phaser.Scene {
                 { type: 'image', key: 'loadingbar_fill', url: 'img/dispositivos/loadingbar_fill.png' }
             ]
         }});
-        this.flagcarregado = false;
+        this.flagcarregado = [false,false];
     }
 
     init(dadosGame) {
-        this.scene.get(dadosGame.nome).events.on('pronto',function(){            
-            //this.scene.stop();
-            this.flagcarregado = true;
+        this.scene.get(dadosGame.nome).events.on('pronto',function(){
+            this.flagcarregado[0] = true;
         },this);
     }
 
@@ -47,24 +46,33 @@ class load extends Phaser.Scene {
 
     preload(){
         this.loadingbar_bg   = this.add.sprite(400, 300, "loadingbar_bg");
-		this.loadingbar_fill = this.add.sprite(400, 300, "loadingbar_fill");
+        this.loadingbar_fill = this.add.sprite(400, 300, "loadingbar_fill");
         this.setPreloadSprite(this.loadingbar_fill);
-        var i = 0;
-		for (i = 0; i < 500; i++) {
+		for (let i = 0; i < 500; i++) {
             this.load.image('testloading'+i, 'img/spritearray.png');
         };
+        this.load.on('complete', ()=>{
+            this.flagcarregado[1] = true;
+        });
     }
 
-    create(dadosGame) {        
+    create(dadosGame) {
         this.scene.launch(dadosGame.nome);
+        //this.scene.launch(dadosGame.nome);
+        /*setTimeout(
+            () => {
+                //this.scene.launch(dadosGame.nome);        
+            },
+            1500
+        );*/
         this.scene.bringToTop();
     }
 
     update(){
-        if(this.flagcarregado){
+        if(this.flagcarregado[0] && this.flagcarregado[1]){
             this.loadingbar_bg.destroy();
 		    this.loadingbar_fill.destroy();
-            this.preloadSprite = null;
+            this.preloadSprite = null;     
             this.scene.stop();
         };
     }

@@ -20,6 +20,7 @@ class GameProcessos extends Phaser.Scene{
         this.load.spritesheet('CREDITOS','assets/botaoCREDITOS.png',{frameWidth:227,frameHeight:40});
         this.load.spritesheet('MUSICA', 'assets/musicicon.png', {frameWidth: 17, frameHeight: 17});
         this.load.spritesheet('SOM', 'assets/soundicon.png', {frameWidth: 17, frameHeight: 17});
+        this.load.spritesheet('botaoVoltar', 'assets/botaoVOLTAR.png', {frameWidth: 200, frameHeight: 40});
         this.load.audio('musicaMenu', 'audio/musicaMenu.wav');
         this.load.audio('beepBotao', 'audio/beepBotao.wav');
         this.load.audio('botaoPressionado', 'audio/botaoPressionado.wav');
@@ -56,6 +57,19 @@ class GameProcessos extends Phaser.Scene{
         botaoCREDITOS = this.add.sprite(LARGURA/2, ALTURA-100,'CREDITOS').setOrigin(0.5).setInteractive();
         botaoMusica = this.add.sprite(LARGURA - 20, 20, 'MUSICA').setOrigin(0.5).setInteractive();
         botaoSom = this.add.sprite(LARGURA - 40, 20, 'SOM').setOrigin(0.5).setInteractive();
+        botaoVoltarMenu = this.add.sprite(LARGURA/2, ALTURA*5/6+50, 'botaoVoltar').setOrigin(0.5).setInteractive();
+
+        botaoVoltarMenu.on('pointerover', function(){
+			botaoVoltar.setFrame(1);
+        });
+        botaoVoltarMenu.on('pointerout' , function(){
+            botaoVoltar.setFrame(0);
+        });
+        botaoVoltarMenu.on('pointerdown' , function(){
+            somMenu.stop();
+            this.scene.scene.stop(this.scene.scene.key);
+            this.scene.scene.start('menu');
+        });
 
         if(!habilitaMusica){
             botaoMusica.setFrame(2);
@@ -203,7 +217,6 @@ class GameProcessos extends Phaser.Scene{
             somMenu.stop();
              this.scene.scene.start('creditos');
         });
-
         this.events.emit('pronto');
     }
 }

@@ -187,12 +187,14 @@ var memoria = new Memoria('memoriaprincipal',5,10);
 var gridMemPrincipal;
 var swap = new Memoria('swap',5,6);
 var gridSwap;
-
+var soundstatus;
+var soundimage;
 var infoalgoritmo = null;
 var infopontuacaopontos = null;
 var melhorposicao;
 var temporizador;
 var flagtemporizador;
+var musicas;
 var tempodecorrido = 0;
 var flagreg;
 var regtempo=3;
@@ -208,11 +210,11 @@ var moveupecapramemoria = false;
 var moveupecadaswappramemoria = false;
 var moveupecadamemoriapraswap = false;
 
+
 class GameMemoria extends Phaser.Scene {
     constructor (){
         super('GameMemoria');
     }
-
     preload ()
     {
         //Carregando imagem do grid
@@ -246,22 +248,31 @@ class GameMemoria extends Phaser.Scene {
         this.load.image('container2','img/memoria/container2.jpg');
         this.load.image('container3','img/memoria/container3.jpg');
         this.load.image('container4','img/memoria/container4.jpg');
-
+        this.load.image('soundon','img/memoria/soundon.png');
+        this.load.image('soundoff','img/memoria/soundoff.png');
+        this.load.spritesheet('botaoVoltar', 'assets/botaoVOLTAR.png', {frameWidth: 200, frameHeight: 40});
         //this.load.audio('musicas', ['audio/TopGear1.mp3', 'audio/Tetris.mp3',]);
         this.load.audio('musicas', ['audio/Tetris.mp3']);
+
     }
 
     create ()
-    {
-        var musicas = this.sound.add('musicas');
+    {        
+        musicas = this.sound.add('musicas');
         musicas.loop = true;
-        musicas.play();
+        musicas.play();   
+        
 
         this.add.image(0,0,'imagemdefundo').setOrigin(0,0);
         this.add.image(520,80,'container2').setOrigin(0,0);
         this.add.image(520,220,'container1').setOrigin(0,0);
         this.add.image(520,300,'container4').setOrigin(0,0);
-        //this.add.image(520,240,'container3').setOrigin(0,0);
+        soundimage=this.add.image(750,0,'soundon').setOrigin(0.0);
+        soundimage.setInteractive();
+        soundstatus=1;
+        soundimage.on('pointerup', function (pointer) {
+            alterasom(this.scene);
+        });
 
         /**
          * Criação do grid de memória principal
@@ -318,9 +329,21 @@ class GameMemoria extends Phaser.Scene {
         infoalgoritmo = this.add.text(580, 237, '', { fill: '#000000', fontFamily: 'font1' ,fontSize: 11 });
         this.add.text(600, 320, 'MENU', { fill: '#000000', fontFamily: 'font1' ,fontSize: 11 })
         this.add.text(570, 340, 'Pontuação:', { fill: '#000000', fontFamily: 'font1' ,fontSize: 11 });
-        this.add.text(60,50,'MEMORIA PRINCIPAL',{ fill: '#000000', fontFamily: 'font1' ,fontSize: 15})
+        this.add.text(60,50,'MEMÓRIA PRINCIPAL',{ fill: '#000000', fontFamily: 'font1' ,fontSize: 15})
         this.add.text(60,290,'SWAP',{ fill: '#000000', fontFamily: 'font1' ,fontSize: 15})
         infopontuacaopontos = this.add.text(610, 360, String(pontos), { fill: '#000000', fontFamily: 'font1' ,fontSize: 11 });
+        botaoVoltar = this.add.sprite(600, 500, 'botaoVoltar').setOrigin(0.5).setInteractive();
+        botaoVoltar.on('pointerover', function(){
+            this.setFrame(1);
+        });
+        botaoVoltar.on('pointerout', function(){
+            this.setFrame(0);
+        });
+        botaoVoltar.on('pointerdown', function(){
+            musicas.stop();
+            this.scene.scene.stop('GameMemoria');
+            this.scene.scene.start('menu');
+        });
 
         //Cria Relogio
         temporizador = 3;
@@ -496,7 +519,31 @@ class GameMemoria extends Phaser.Scene {
         }
     }
 }
-
+/**
+ * Função responsável por alterar o som
+ */
+function alterasom(scene){   
+ soundimage.destroy();
+ if(soundstatus){
+   soundimage = scene.add.image(750,0,'soundoff').setOrigin(0.0);
+   soundimage.setInteractive();
+   soundimage.on('pointerup', function (pointer) {
+    alterasom(this.scene);
+    });
+   soundstatus=0;
+   musicas.stop();
+   //musicas.mute = true;
+ }else{     
+   soundimage = scene.add.image(750,0,'soundon').setOrigin(0.0);
+   soundimage.setInteractive();
+   soundimage.on('pointerup', function (pointer) {
+    alterasom(this.scene);
+    });
+   soundstatus=1;
+   musicas.play();
+   //musicas.mute = false;
+ }
+}
 /**
  * Função responsável por sortear Tamanho Cor e Algoritmo para a proxima peca a ser exibida
  * Os valores são armazenados nas variaveis globais cor tamanho e algoritmo
