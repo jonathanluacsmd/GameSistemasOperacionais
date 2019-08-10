@@ -16,6 +16,7 @@ class menu extends Phaser.Scene {
         var imagemmemoria = this.add.image(400,250, 'menumemoria').setInteractive();
         var imagemarquivos = this.add.image(400,350, 'menuarquivos').setInteractive();
         var imagemdispositivos = this.add.image(400,450, 'menudispositivos').setInteractive();
+        var imagemcreditos = this.add.image(400,550, 'menucreditos').setInteractive();
         
         imagemmemoria.on('pointerover', function () {
             this.setFrame(1);
@@ -68,6 +69,19 @@ class menu extends Phaser.Scene {
             this.scene.scene.stop();
             this.scene.scene.start('load',{nome: 'GameDispositivos'}); 
         });
+
+        imagemcreditos.on('pointerover', function () {
+            this.setFrame(1);
+        });
+
+        imagemcreditos.on('pointerout', function () {
+            this.setFrame(0);
+        });
+
+        imagemcreditos.once('pointerdown', function(pointer){
+            //this.scene.scene.stop();
+            this.scene.scene.start('creditosprincipais'); 
+        });
     }
     update(){
         //console.log(this.scene.isVisible('load'));
@@ -84,5 +98,5 @@ var game = new Phaser.Game({
         default: 'arcade',
         arcade: { debug: false }
     },
-    scene: [menu, load,GameMemoria,GameArquivos,GameDispositivos,Disploader,GameProcessos, jogo, sobre, instrucao, creditos]
+    scene: [menu, load,GameMemoria,GameArquivos,GameDispositivos,Disploader,GameProcessos, jogo, sobre, instrucao, creditos,creditosprincipais]
 });

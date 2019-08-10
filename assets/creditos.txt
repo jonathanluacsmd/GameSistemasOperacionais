@@ -1,0 +1,29 @@
+Desenvido Por:
+    Game Processos:
+        Guilherme Pontarolo Cordeiro
+        Igor Guilherme Fidler
+        Miguel Angelo Carach
+    Game Arquivos:
+        Felipe Stadler
+        Bruno Seixas Bonfati
+    Game Disposistivos:
+        Rullyan Gabriel
+        Pedro Brandalise
+        Bruno Menegotto
+        Nicollas Albuquerque
+        Gabriel Oliveira
+    Game Memoria:
+        Jonathan Lucas de Matos Diniz
+        Rhuan Galvao
+        Tarcísio Mazur Junior
+
+Arte: 
+    Gulliver Tadra Waldmann
+    Daniel Siemieniaco
+
+Sobre:
+    Este jogo foi desenvolvido por alunos do 3 Ano de Engenharia de Computação 
+    da Universidade Estadual de Ponta Grossa como nota parcial da 
+    disciplina de Sistemas Operacionais
+
+
